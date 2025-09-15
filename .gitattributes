@@ -1,0 +1,9 @@
+/mvnw text eol=lf
+*.cmd text eol=crlf
+
+# .gitattributes
+# encrypt sqlite and .env files
+*.db        filter=git-crypt diff=git-crypt
+*.sqlite3   filter=git-crypt diff=git-crypt
+*.sql   filter=git-crypt diff=git-crypt
+.env        filter=git-crypt diff=git-crypt
