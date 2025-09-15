@@ -18,9 +18,9 @@ public class SongsController {
         return svc.list();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Songs> one(@PathVariable Long id){
-        Songs s = svc.get(id);
+    @GetMapping("/{songId}")
+    public ResponseEntity<Songs> one(@PathVariable String songId){
+        Songs s = svc.get(songId);
         return s == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(s);
     }
 }

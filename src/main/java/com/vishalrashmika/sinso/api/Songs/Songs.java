@@ -1,7 +1,6 @@
 package com.vishalrashmika.sinso.api.Songs;
 
 public record Songs(
-    Long id,
     String songId,
     String songName,
     String songNameSinhala,

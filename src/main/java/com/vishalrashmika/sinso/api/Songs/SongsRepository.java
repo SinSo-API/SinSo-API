@@ -3,7 +3,6 @@ package com.vishalrashmika.sinso.api.Songs;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
@@ -20,7 +19,6 @@ public class SongsRepository{
         @Override
         public Songs mapRow(ResultSet rs, int rowNum) throws SQLException{
             return new Songs(
-                rs.getLong("id"),
                 rs.getString("songId"),
                 rs.getString("songName"),
                 rs.getString("songNameSinhala"),
@@ -36,7 +34,6 @@ public class SongsRepository{
         }
     };
 
-
     private static final RowMapper<SongsSummary> SONGS_SUMMARY_ROW_MAPPER = new RowMapper<> () {
         @Override
         public SongsSummary mapRow(ResultSet rs, int rowNum) throws SQLException{
@@ -50,7 +47,6 @@ public class SongsRepository{
         }
     };
 
-
     public List<SongsSummary> findAll(){
         return jdbc.query(
                 "SELECT s.SongID, s.SongName, s.SongNameSinhala, s.ArtistID, l.LyricID FROM Songs s LEFT JOIN Lyrics l ON s.SongID = l.SongID ORDER BY s.ID",
@@ -58,11 +54,11 @@ public class SongsRepository{
         );
     }
 
-    public Songs findById(long id) {
+    public Songs findById(String songId) {
         return jdbc.query(
-                "SELECT s.ID, s.SongID, s.SongName, s.SongNameSinhala, s.Composer, s.Lyricist, a.ArtistID, a.ArtistName, a.ArtistNameSinhala, l.LyricID, l.LyricContent, l.LyricContentSinhala FROM Songs s LEFT JOIN Artists a ON s.ArtistID = a.ArtistID LEFT JOIN Lyrics l ON s.SongID = l.SongID WHERE s.ID = ?",
+                "SELECT s.ID, s.SongID, s.SongName, s.SongNameSinhala, s.Composer, s.Lyricist, a.ArtistID, a.ArtistName, a.ArtistNameSinhala, l.LyricID, l.LyricContent, l.LyricContentSinhala FROM Songs s LEFT JOIN Artists a ON s.ArtistID = a.ArtistID LEFT JOIN Lyrics l ON s.SongID = l.SongID WHERE s.SongID = ?",
                 SONG_ROW_MAPPER,
-                id
+                songId
         ).stream().findFirst().orElse(null);
     }
 }
