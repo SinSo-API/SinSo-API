@@ -13,12 +13,12 @@ public class SongsController {
         this.svc = svc;
     }
 
-    @GetMapping
+    @GetMapping({"", "/"})
     public List<SongsSummary> all() {
         return svc.list();
     }
 
-    @GetMapping("/{songId}")
+    @GetMapping({"/{songId}", "/{songId}/"})
     public ResponseEntity<Songs> one(@PathVariable String songId){
         Songs s = svc.get(songId);
         return s == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(s);
