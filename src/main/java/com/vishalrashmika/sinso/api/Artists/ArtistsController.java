@@ -1,10 +1,9 @@
 package com.vishalrashmika.sinso.api.Artists;
 
 import java.util.List;
+import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
@@ -20,4 +19,12 @@ public class ArtistsController {
     public List<ArtistsSummary> all() {
         return svc.list();
     }
+
+    @GetMapping({"/{artistId}", "/{artistId}/"})
+    public ResponseEntity<ArtistsWithSongs> one(@PathVariable String artistId) {
+        Optional<ArtistsWithSongs> artist = svc.getArtistWithSongs(artistId);
+        return artist.map(ResponseEntity::ok)
+                    .orElse(ResponseEntity.notFound().build());
+    }
+
 }
