@@ -4,8 +4,11 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 @RestController
 @RequestMapping("/v1/songs")
+@Tag(name = "Songs")
 public class SongsController {
     private final SongsService svc;
 

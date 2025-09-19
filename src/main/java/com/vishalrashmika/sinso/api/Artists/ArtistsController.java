@@ -5,9 +5,12 @@ import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+
 
 @RestController
 @RequestMapping("/v1/artists")
+@Tag(name = "Artists")
 public class ArtistsController {
     private final ArtistsService svc;
 
