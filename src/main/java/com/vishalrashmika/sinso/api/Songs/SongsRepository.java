@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public class SongsRepository{
@@ -54,11 +55,12 @@ public class SongsRepository{
         );
     }
 
-    public Songs findById(String songId) {
-        return jdbc.query(
+    public Optional<Songs> findSongById(String songId) {
+        List<Songs> results = jdbc.query(
                 "SELECT s.ID, s.SongID, s.SongName, s.SongNameSinhala, s.Composer, s.Lyricist, a.ArtistID, a.ArtistName, a.ArtistNameSinhala, l.LyricID, l.LyricContent, l.LyricContentSinhala FROM Songs s LEFT JOIN Artists a ON s.ArtistID = a.ArtistID LEFT JOIN Lyrics l ON s.SongID = l.SongID WHERE s.SongID = ?",
                 SONG_ROW_MAPPER,
                 songId
-        ).stream().findFirst().orElse(null);
+        );
+        return results.isEmpty() ? Optional.empty() : Optional.of(results.get(0));
     }
 }
