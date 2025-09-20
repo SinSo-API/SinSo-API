@@ -22,4 +22,48 @@ public class ErrorExample {
                 .build();
         return errorResponse;
     }
+
+    public static ErrorResponse invalidArtIdErrorResponse(String artistId){
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .status(400)
+                .code("INVALID_ARTIST_ID")
+                .message("Invalid artist ID format")
+                .details("Artist ID must follow the pattern ART-00001 (ART- followed by 5 digits)")
+                .path("/v1/artists/" + artistId)
+                .build();
+        return errorResponse;
+    }
+
+    public static ErrorResponse artistNotFoundErrorResponse(String artistId){
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .status(404)
+                .code("ARTIST_NOT_FOUND")
+                .message("Artist not found")
+                .details("Artist with ID " + artistId + " does not exist")
+                .path("/v1/artists/" + artistId)
+                .build();
+        return errorResponse;
+    }
+
+    public static ErrorResponse invalidRequestErrorResponse(IllegalArgumentException e, String artistId){
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .status(400)
+                .code("INVALID_REQUEST")
+                .message("Invalid request parameters")
+                .details(e.getMessage())
+                .path("/v1/artists/" + artistId)
+                .build();
+        return errorResponse;
+    }
+
+    public static ErrorResponse invalidServerErrorResponse(Exception e, String artistId){
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .status(500)
+                .code("INTERNAL_SERVER_ERROR")
+                .message("An unexpected error occurred")
+                .details(e.getMessage())
+                .path("/v1/artists/" + artistId)
+                .build();
+        return errorResponse;
+    }
 }
