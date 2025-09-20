@@ -1,14 +1,14 @@
 package com.vishalrashmika.sinso.api.Utils;
 
-import com.vishalrashmika.sinso.api.Config.IDPatterns;
+import java.util.regex.Pattern;
 
 public class Utils {
-    public static boolean isValidArtistId(String artistId) {
-        if (artistId == null || artistId.trim().isEmpty()) {
+    public static boolean isValidId(String Id, Pattern pattern) {
+        if (Id == null || Id.trim().isEmpty()) {
             return false;
         }
 
-        if (!IDPatterns.ARTIST_ID_PATTERN.matcher(artistId).matches()) {
+        if (!pattern.matcher(Id).matches()) {
             return false;
         }
         

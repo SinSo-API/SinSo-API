@@ -1,6 +1,6 @@
 package com.vishalrashmika.sinso.api.Errors;
 
-public class ErrorExample {
+public class ErrorsArtists {
     public static final String INTERNAL_SERVER_ERROR_ALL_ARTISTS = "{ \"status\": 500, \"code\": \"INTERNAL_SERVER_ERROR\", \"message\": \"An unexpected error occurred\", \"details\": \"Database connection failed\", \"path\": \"/v1/artists/\", \"timestamp\": \"2025-09-19T10:30:00\" }";
 
     public static final String INVALID_ARTIST_ID = 

@@ -1,6 +1,7 @@
 package com.vishalrashmika.sinso.api.Lyrics;
 
 import org.springframework.stereotype.Service;
+import java.util.Optional;
 
 @Service
 public class LyricsService {
@@ -10,7 +11,7 @@ public class LyricsService {
         this.repo = repo;
     }
 
-    public Lyrics get(String lyricId){
+    public Optional<Lyrics> getLyricInfo(String lyricId){
         return repo.findByLyricId(lyricId);
     }
 }

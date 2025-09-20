@@ -14,7 +14,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
 import com.vishalrashmika.sinso.api.Utils.Utils;
-import com.vishalrashmika.sinso.api.Errors.ErrorExample;
+import com.vishalrashmika.sinso.api.Config.IDPatterns;
+import com.vishalrashmika.sinso.api.Errors.ErrorsArtists;
 
 @RestController
 @RequestMapping("/v1/artists")
@@ -34,14 +35,14 @@ public class ArtistsController {
         @ApiResponse(responseCode = "500", description = "Internal server error",
                     content = @Content(mediaType = "application/json",
                                      examples = @io.swagger.v3.oas.annotations.media.ExampleObject(
-                                         value = ErrorExample.INTERNAL_SERVER_ERROR_ALL_ARTISTS)))
+                                         value = ErrorsArtists.INTERNAL_SERVER_ERROR_ALL_ARTISTS)))
     })
     public ResponseEntity<?> allArtistsInfo() {
         try {
             List<ArtistsSummary> artists = svc.list();
             return ResponseEntity.ok(artists);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body(ErrorExample.getAllArtistsErrorResponse(e));
+            return ResponseEntity.badRequest().body(ErrorsArtists.getAllArtistsErrorResponse(e));
         }
     }
 
@@ -53,20 +54,20 @@ public class ArtistsController {
         @ApiResponse(responseCode = "400", description = "Invalid artist ID format",
                     content = @Content(mediaType = "application/json",
                                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(
-                                        value = ErrorExample.INVALID_ARTIST_ID))),
+                                        value = ErrorsArtists.INVALID_ARTIST_ID))),
         @ApiResponse(responseCode = "404", description = "Artist not found",
                     content = @Content(mediaType = "application/json",
                                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(
-                                        value = ErrorExample.ARTIST_NOT_FOUND))),
+                                        value = ErrorsArtists.ARTIST_NOT_FOUND))),
         @ApiResponse(responseCode = "500", description = "Internal server error",
                     content = @Content(mediaType = "application/json",
                                     examples = @io.swagger.v3.oas.annotations.media.ExampleObject(
-                                        value = ErrorExample.INTERNAL_SERVER_ERROR_ARTISTS)))
+                                        value = ErrorsArtists.INTERNAL_SERVER_ERROR_ARTISTS)))
     })
-    public ResponseEntity<?> one(@PathVariable String artistId) {        
+    public ResponseEntity<?> getArtistInfo(@PathVariable String artistId) {        
         try{
-            if (!Utils.isValidArtistId(artistId)) {
-                return ResponseEntity.badRequest().body(ErrorExample.invalidArtIdErrorResponse(artistId));
+            if (!Utils.isValidId(artistId, IDPatterns.ARTIST_ID_PATTERN)) {
+                return ResponseEntity.badRequest().body(ErrorsArtists.invalidArtIdErrorResponse(artistId));
             }
             
             Optional<ArtistsWithSongs> artist = svc.getArtistWithSongs(artistId);
@@ -75,14 +76,14 @@ public class ArtistsController {
                 return ResponseEntity.ok(artist.get());
             }
             else{                
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorExample.artistNotFoundErrorResponse(artistId));
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorsArtists.artistNotFoundErrorResponse(artistId));
             }
         }
         catch (IllegalArgumentException e){
-            return ResponseEntity.badRequest().body(ErrorExample.invalidRequestErrorResponse(e, artistId));
+            return ResponseEntity.badRequest().body(ErrorsArtists.invalidRequestErrorResponse(e, artistId));
         }
         catch (Exception e){
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ErrorExample.invalidServerErrorResponse(e, artistId));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ErrorsArtists.invalidServerErrorResponse(e, artistId));
         }
     }
 }
