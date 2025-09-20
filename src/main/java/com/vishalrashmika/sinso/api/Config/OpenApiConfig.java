@@ -1,5 +1,7 @@
 package com.vishalrashmika.sinso.api.Config;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
 import io.swagger.v3.oas.annotations.info.Info;
@@ -15,7 +17,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
         ),
         description = "OpenApi documentation for SinSo API - Largest Open-Source Sinhala Songs Lyrics API",
         title = "SinSo API Documentation",
-        version = "1.0.0",
+        version = "${spring.application.version:1.0.0}",
         license = @License(
             name = "GNU General Public License v3.0",
             url = "https://www.gnu.org/licenses/gpl-3.0.en.html"
@@ -33,5 +35,6 @@ import io.swagger.v3.oas.annotations.servers.Server;
     }
 )
 public class OpenApiConfig {
-   
+    @Value("${spring.application.version:1.0.0}")
+    private String applicationVersion;
 }

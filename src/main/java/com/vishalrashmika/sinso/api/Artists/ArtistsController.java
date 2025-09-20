@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -19,7 +20,7 @@ import com.vishalrashmika.sinso.api.Errors.ErrorsArtists;
 
 @RestController
 @RequestMapping("/v1/artists")
-@Tag(name = "Artists")
+@Tag(name = "Artists", description = "Artists information endpoint")
 public class ArtistsController {
     private final ArtistsService svc;
 
@@ -28,6 +29,10 @@ public class ArtistsController {
     }
 
     @GetMapping({"", "/"})
+    @Operation(
+        summary = "Get all artists",
+        description = "Get a summary of all artists info"
+    )
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "All artists info returned successfully",
         content = @Content(mediaType = "application/json",
@@ -47,6 +52,10 @@ public class ArtistsController {
     }
 
     @GetMapping({"/{artistId}", "/{artistId}/"})
+    @Operation(
+        summary = "Get artist info by ID",
+        description = "Retrieve the full information of an artist from ID"
+    )
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Artist found and returned successfully",
                     content = @Content(mediaType = "application/json",
