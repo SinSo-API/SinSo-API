@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,7 +29,7 @@ public class ArtistsController {
         this.svc = svc;
     }
 
-    @GetMapping({"", "/"})
+    @GetMapping()
     @Operation(
         summary = "Get all artists info",
         description = "Get a summary of all artists' information"
@@ -51,7 +52,18 @@ public class ArtistsController {
         }
     }
 
-    @GetMapping({"/{artistId}", "/{artistId}/"})
+    @Hidden
+    @GetMapping("/")
+    public ResponseEntity<?> allArtistsInfoSlash() {
+        try {
+            List<ArtistsSummary> artists = svc.list();
+            return ResponseEntity.ok(artists);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ErrorsArtists.getAllArtistsErrorResponse(e));
+        }
+    }
+
+    @GetMapping("/{artistId}")
     @Operation(
         summary = "Get artist information by artist ID",
         description = "Retrieve the full information of an artist from artist ID"
@@ -74,6 +86,31 @@ public class ArtistsController {
                                         value = ErrorsArtists.INTERNAL_SERVER_ERROR_ARTISTS)))
     })
     public ResponseEntity<?> getArtistInfo(@PathVariable String artistId) {        
+        try{
+            if (!Utils.isValidId(artistId, IDPatterns.ARTIST_ID_PATTERN)) {
+                return ResponseEntity.badRequest().body(ErrorsArtists.invalidArtIdErrorResponse(artistId));
+            }
+            
+            Optional<ArtistsWithSongs> artist = svc.getArtistWithSongs(artistId);
+            
+            if (artist.isPresent()){
+                return ResponseEntity.ok(artist.get());
+            }
+            else{                
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorsArtists.artistNotFoundErrorResponse(artistId));
+            }
+        }
+        catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(ErrorsArtists.invalidRequestErrorResponse(e, artistId));
+        }
+        catch (Exception e){
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ErrorsArtists.invalidServerErrorResponse(e, artistId));
+        }
+    }
+
+    @Hidden
+    @GetMapping("/{artistId}/")
+    public ResponseEntity<?> getArtistInfoSlash(@PathVariable String artistId) {
         try{
             if (!Utils.isValidId(artistId, IDPatterns.ARTIST_ID_PATTERN)) {
                 return ResponseEntity.badRequest().body(ErrorsArtists.invalidArtIdErrorResponse(artistId));

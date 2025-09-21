@@ -11,6 +11,7 @@ import com.vishalrashmika.sinso.api.Config.IDPatterns;
 import com.vishalrashmika.sinso.api.Errors.ErrorsSongs;
 import com.vishalrashmika.sinso.api.Utils.Utils;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -28,7 +29,7 @@ public class SongsController {
         this.svc = svc;
     }
 
-    @GetMapping({"", "/"})
+    @GetMapping("")
     @Operation(
         summary = "Get all song info",
         description = "Get a summary of all songs' information"
@@ -51,7 +52,18 @@ public class SongsController {
         }
     }
 
-    @GetMapping({"/{songId}", "/{songId}/"})
+    @Hidden
+    @GetMapping("/")
+    public ResponseEntity<?> allSongsInfoSlash() {
+        try {
+            List<SongsSummary> songs = svc.list();
+            return ResponseEntity.ok(songs);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(ErrorsSongs.getAllSongsErrorResponse(e));
+        }
+    }
+
+    @GetMapping("/{songId}")
     @Operation(
         summary = "Get song information by song ID",
         description = "Retrieve the full information of a song from song ID"
@@ -74,6 +86,31 @@ public class SongsController {
                                         value = ErrorsSongs.INTERNAL_SERVER_ERROR_SONGS)))
     })
     public ResponseEntity<?> getSongInfo(@PathVariable String songId){
+        try {
+            if (!Utils.isValidId(songId, IDPatterns.SONG_ID_PATTERN)){
+                return ResponseEntity.badRequest().body(ErrorsSongs.invalidSongIdErrorResponse(songId));
+            }
+
+            Optional<Songs> song = svc.getSongInfo(songId);
+
+            if(song.isPresent()){
+                return ResponseEntity.ok(song.get());
+            }
+            else{
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorsSongs.songNotFoundErrorResponse(songId));
+            }
+        }
+        catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(ErrorsSongs.invalidRequestErrorResponse(e, songId));
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ErrorsSongs.invalidServerErrorResponse(e, songId));
+        }
+    }
+
+    @Hidden
+    @GetMapping("/{songId}/")
+    public ResponseEntity<?> getSongInfoSlash(@PathVariable String songId){
         try {
             if (!Utils.isValidId(songId, IDPatterns.SONG_ID_PATTERN)){
                 return ResponseEntity.badRequest().body(ErrorsSongs.invalidSongIdErrorResponse(songId));

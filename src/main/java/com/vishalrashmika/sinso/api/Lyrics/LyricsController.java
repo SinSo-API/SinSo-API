@@ -10,6 +10,7 @@ import com.vishalrashmika.sinso.api.Config.IDPatterns;
 import com.vishalrashmika.sinso.api.Errors.ErrorsLyrics;
 import com.vishalrashmika.sinso.api.Utils.Utils;
 
+import io.swagger.v3.oas.annotations.Hidden;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -27,7 +28,7 @@ public class LyricsController {
         this.svc = svc;
     }
 
-    @GetMapping({"/{lyricId}", "/{lyricId}/"})
+    @GetMapping("/{lyricId}")
     @Operation(
         summary = "Get lyrics by lyric ID",
         description = "Retrieve the lyrics of a song using from lyric ID"
@@ -50,6 +51,31 @@ public class LyricsController {
                                         value = ErrorsLyrics.INTERNAL_SERVER_ERROR_LYRICS)))
     })
     public ResponseEntity<?> getLyricInfo(@PathVariable String lyricId) {
+        try {
+            if (!Utils.isValidId(lyricId, IDPatterns.LYRIC_ID_PATTERN)){
+                return ResponseEntity.badRequest().body(ErrorsLyrics.invalidLyricIdErrorResponse(lyricId));
+            }
+
+            Optional<Lyrics> lyrics = svc.getLyricInfo(lyricId);
+
+            if(lyrics.isPresent()){
+                return ResponseEntity.ok(lyrics.get());
+            }
+            else{
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorsLyrics.lyricNotFoundErrorResponse(lyricId));
+            }
+        }
+        catch (IllegalArgumentException e){
+            return ResponseEntity.badRequest().body(ErrorsLyrics.invalidRequestErrorResponse(e, lyricId));
+        }
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(ErrorsLyrics.invalidServerErrorResponse(e, lyricId));
+        }
+    }
+
+    @Hidden
+    @GetMapping("/{lyricId}/")
+    public ResponseEntity<?> getLyricInfoSlash(@PathVariable String lyricId) {
         try {
             if (!Utils.isValidId(lyricId, IDPatterns.LYRIC_ID_PATTERN)){
                 return ResponseEntity.badRequest().body(ErrorsLyrics.invalidLyricIdErrorResponse(lyricId));
