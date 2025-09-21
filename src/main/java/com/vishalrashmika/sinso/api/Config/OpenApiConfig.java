@@ -1,6 +1,8 @@
 package com.vishalrashmika.sinso.api.Config;
 
+import org.springdoc.core.customizers.OpenApiCustomizer;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 
 import io.swagger.v3.oas.annotations.OpenAPIDefinition;
 import io.swagger.v3.oas.annotations.info.Contact;
@@ -11,13 +13,13 @@ import io.swagger.v3.oas.annotations.servers.Server;
 @OpenAPIDefinition(
     info = @Info(
         contact = @Contact(
-            name = "Vishal Rashmika",
-            email = "vishal@vishalrashmika.com",
-            url = "https://vishalrashmika.com/"
+            name = "${app.contact.name:Vishal Rashmika}",
+            email = "${app.contact.email:contact@vishalrashmika.com}",
+            url = "${app.contact.url:https://vishalrashmika.com}"
         ),
-        description = "OpenApi documentation for SinSo API - Largest Open-Source Sinhala Songs Lyrics API",
-        title = "SinSo API Documentation",
-        version = "${spring.application.version:1.0.0}",
+        description = "${app.doc_description:REST API documentation for SINSO music platform}",
+        title = "${app.doc_title:SINSO API Documentation}",
+        version = "${app.doc_version:1.0.0}",
         license = @License(
             name = "GNU General Public License v3.0",
             url = "https://www.gnu.org/licenses/gpl-3.0.en.html"
@@ -35,6 +37,21 @@ import io.swagger.v3.oas.annotations.servers.Server;
     }
 )
 public class OpenApiConfig {
-    @Value("${spring.application.version:1.0.0}")
-    private String applicationVersion;
+    @Value("${app.doc_version:1.0.0}")
+    private String docVersion;
+
+    @Value("${app.doc_title:SINSO API Documentation}")
+    private String appDocTitle;
+
+    @Value("${app.doc_description:REST API documentation for SINSO music platform}")
+    private String appDocDescription;
+
+    @Value("${app.contact.name:Vishal Rashmika}")
+    private String contactName;
+
+    @Value("${app.contact.email:contact@vishalrashmika.com}")
+    private String contactEmail;
+
+    @Value("${app.contact.url:https://vishalrashmika.com}")
+    private String contactUrl;
 }
