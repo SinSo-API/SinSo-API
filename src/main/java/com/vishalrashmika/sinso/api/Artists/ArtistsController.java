@@ -30,8 +30,8 @@ public class ArtistsController {
 
     @GetMapping({"", "/"})
     @Operation(
-        summary = "Get all artists",
-        description = "Get a summary of all artists info"
+        summary = "Get all artists info",
+        description = "Get a summary of all artists' information"
     )
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "All artists info returned successfully",
@@ -53,8 +53,8 @@ public class ArtistsController {
 
     @GetMapping({"/{artistId}", "/{artistId}/"})
     @Operation(
-        summary = "Get artist info by ID",
-        description = "Retrieve the full information of an artist from ID"
+        summary = "Get artist information by artist ID",
+        description = "Retrieve the full information of an artist from artist ID"
     )
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Artist found and returned successfully",

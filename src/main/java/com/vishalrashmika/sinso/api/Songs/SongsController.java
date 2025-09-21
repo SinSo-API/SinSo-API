@@ -11,6 +11,7 @@ import com.vishalrashmika.sinso.api.Config.IDPatterns;
 import com.vishalrashmika.sinso.api.Errors.ErrorsSongs;
 import com.vishalrashmika.sinso.api.Utils.Utils;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -19,7 +20,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/v1/songs")
-@Tag(name = "Songs")
+@Tag(name = "Songs", description = "Song information endpoint")
 public class SongsController {
     private final SongsService svc;
 
@@ -28,6 +29,10 @@ public class SongsController {
     }
 
     @GetMapping({"", "/"})
+    @Operation(
+        summary = "Get all song info",
+        description = "Get a summary of all songs' information"
+    )
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "All Songs info returned successfully",
         content = @Content(mediaType = "application/json",
@@ -47,6 +52,10 @@ public class SongsController {
     }
 
     @GetMapping({"/{songId}", "/{songId}/"})
+    @Operation(
+        summary = "Get song information by song ID",
+        description = "Retrieve the full information of a song from song ID"
+    )
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Song found and returned successfully",
                     content = @Content(mediaType = "application/json",

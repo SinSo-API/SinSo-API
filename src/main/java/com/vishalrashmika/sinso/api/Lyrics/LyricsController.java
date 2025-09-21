@@ -10,6 +10,7 @@ import com.vishalrashmika.sinso.api.Config.IDPatterns;
 import com.vishalrashmika.sinso.api.Errors.ErrorsLyrics;
 import com.vishalrashmika.sinso.api.Utils.Utils;
 
+import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -18,7 +19,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/v1/lyrics")
-@Tag(name = "Lyrics")
+@Tag(name = "Lyrics", description = "Lyrics information endpoint")
 public class LyricsController {
     private final LyricsService svc;
 
@@ -27,6 +28,10 @@ public class LyricsController {
     }
 
     @GetMapping({"/{lyricId}", "/{lyricId}/"})
+    @Operation(
+        summary = "Get lyrics by lyric ID",
+        description = "Retrieve the lyrics of a song using from lyric ID"
+    )
     @ApiResponses(value = {
         @ApiResponse(responseCode = "200", description = "Lyric found and returned successfully",
                     content = @Content(mediaType = "application/json",
