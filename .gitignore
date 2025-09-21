@@ -26,3 +26,5 @@ replay_pid*
 git-crypt-0.7.0-x86_64.exe
 
 target/
+
+.vscode/

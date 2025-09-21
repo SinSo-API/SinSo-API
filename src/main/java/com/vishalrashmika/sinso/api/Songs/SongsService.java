@@ -2,6 +2,7 @@ package com.vishalrashmika.sinso.api.Songs;
 
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SongsService {
@@ -15,7 +16,7 @@ public class SongsService {
         return repo.findAll();
     }
 
-    public Songs get(String songId){
-        return repo.findById(songId);
+    public Optional<Songs> getSongInfo(String songId){
+        return repo.findSongById(songId);
     }
 }
