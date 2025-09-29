@@ -1,4 +1,3 @@
-// js/app.js
 class DatabaseSearch {
     constructor() {
         this.searchInput = document.getElementById('searchInput');
@@ -39,7 +38,7 @@ class DatabaseSearch {
     }
     
     escapeRegex(text) {
-        return text.replace(/[.*+?^${}()|[\]\\]/g, '\\    }');
+        return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
     }
     
     truncateText(text, maxLength = 150) {
@@ -383,10 +382,8 @@ class DatabaseSearch {
     }
 }
 
-// Make searchInstance global for pagination callbacks
 let searchInstance;
 
-// Initialize the search functionality when the page loads
 document.addEventListener('DOMContentLoaded', () => {
     searchInstance = new DatabaseSearch();
 });
