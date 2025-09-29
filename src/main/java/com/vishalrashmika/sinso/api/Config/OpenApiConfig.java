@@ -27,10 +27,6 @@ import io.swagger.v3.oas.annotations.servers.Server;
     ),
     servers = {
         @Server(
-            description = "Local Development Environment",
-            url = "http://localhost:8080"
-        ),
-        @Server(
             description = "Production Environment",
             url = "https://api.sinso.vishalrashmika.com"
         )

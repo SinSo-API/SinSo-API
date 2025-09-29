@@ -1,0 +1,304 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+    color: #1e293b;
+    line-height: 1.6;
+}
+.container {
+    max-width: 56rem;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+.mainHeader{
+    font-family: "Josefin Sans", sans-serif;
+    font-weight: bold;
+    font-size: 100px;
+}
+.logo {
+    width: 120px;
+    height: 120px;
+    background-color: #f7f1e5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+}
+.logo::before {
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+header h1 {
+    font-size: 1.875rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #1e293b;
+}
+.search-section {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(8px);
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+}
+.search-container {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+#searchInput {
+    flex: 1;
+    height: 3rem;
+    padding: 0 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    background: white;
+    transition: border-color 0.15s ease;
+}
+#searchInput:focus {
+    outline: none;
+    border-color: #94a3b8;
+    box-shadow: 0 0 0 3px rgba(148, 163, 184, 0.1);
+}
+#searchBtn {
+    height: 3rem;
+    padding: 0 1.5rem;
+    background-color: #1e293b;
+    color: white;
+    border: none;
+    border-radius: 0.375rem;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+}
+#searchBtn:hover:not(:disabled) {
+    background-color: #334155;
+}
+#searchBtn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+.filters label {
+    font-size: 0.875rem;
+    color: #64748b;
+    font-weight: 500;
+}
+#columnSelect {
+    padding: 0.5rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    background: white;
+    font-size: 0.875rem;
+    min-width: 16rem;
+}
+.loading {
+    text-align: center;
+    padding: 2rem;
+}
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #e2e8f0;
+    border-top: 4px solid #1e293b;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+.results-section {
+    margin-bottom: 2rem;
+}
+#results-count {
+    font-size: 1.125rem;
+    color: #1e293b;
+    margin-bottom: 1rem;
+    font-weight: 500;
+}
+.results-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.result-item {
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    transition: box-shadow 0.15s ease;
+}
+.result-item:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+}
+.result-item h3 {
+    font-size: 1.25rem;
+    color: #1e293b;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+.result-item .subtitle {
+    font-size: 1rem;
+    color: #64748b;
+    margin-bottom: 0.75rem;
+    font-style: italic;
+}
+.song-details {
+    margin-bottom: 1rem;
+}
+.song-details p {
+    margin-bottom: 0.5rem;
+    color: #374151;
+}
+.song-details strong {
+    color: #1e293b;
+    font-weight: 600;
+}
+.song-meta {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+}
+.meta-item {
+    font-size: 0.875rem;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+}
+.lyrics-preview {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e2e8f0;
+}
+.lyrics-preview strong {
+    color: #1e293b;
+    font-weight: 600;
+}
+.lyrics-content {
+    background: #f8fafc;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: #374151;
+}
+mark {
+    background-color: #fef3c7;
+    color: #92400e;
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.125rem;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+.pagination-btn {
+    padding: 0.5rem 0.75rem;
+    background: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 0.875rem;
+}
+.pagination-btn:hover:not(.active) {
+    background: #f8fafc;
+    border-color: #94a3b8;
+}
+.pagination-btn.active {
+    background: #1e293b;
+    color: white;
+    border-color: #1e293b;
+}
+.pagination-dots {
+    padding: 0.5rem 0.25rem;
+    color: #64748b;
+}
+.no-results {
+    text-align: center;
+    padding: 3rem 2rem;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid #e2e8f0;
+    border-radius: 0.5rem;
+}
+.no-results::before {
+    content: "🔍";
+    display: block;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    opacity: 0.5;
+}
+.no-results p {
+    color: #64748b;
+    font-size: 1rem;
+}
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+    .search-container {
+        flex-direction: column;
+    }
+    .filters {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    #columnSelect {
+        min-width: 100%;
+    }
+    .song-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .pagination {
+        gap: 0.25rem;
+    }
+    .pagination-btn {
+        padding: 0.375rem 0.5rem;
+        font-size: 0.8rem;
+    }
+    header h1 {
+        font-size: 1.5rem;
+    }
+    .result-item h3 {
+        font-size: 1.125rem;
+    }
+}
+.error-message {
+    color: #dc2626;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin: 1rem 0;
+}
