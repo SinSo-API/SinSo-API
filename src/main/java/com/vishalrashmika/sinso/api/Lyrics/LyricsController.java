@@ -18,6 +18,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+
 @RestController
 @RequestMapping("/v1/lyrics")
 @Tag(name = "Lyrics", description = "Lyrics information endpoint")
@@ -26,6 +27,11 @@ public class LyricsController {
 
     public LyricsController(LyricsService svc){
         this.svc = svc;
+    }
+
+    @GetMapping({"","/"})
+    public ResponseEntity<?> voidURI(){
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ErrorsLyrics.UriNotFoundErrorResponse());
     }
 
     @GetMapping("/{lyricId}")

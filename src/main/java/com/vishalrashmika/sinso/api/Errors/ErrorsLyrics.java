@@ -54,4 +54,15 @@ public class ErrorsLyrics {
                 .build();
         return errorResponse;
     }
+
+    public static ErrorResponse UriNotFoundErrorResponse(){
+        ErrorResponse errorResponse = ErrorResponse.builder()
+                .status(404)
+                .code("/v1/lyrics not found")
+                .message("URI is not defined")
+                .details("/v1/lyrics URI does not exist")
+                .path("/v1/lyrics")
+                .build();
+        return errorResponse;
+    }
 }
