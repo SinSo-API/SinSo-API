@@ -7,22 +7,22 @@
 
 **The Largest Open-Source Sinhala Songs Lyrics API** - A comprehensive REST API for accessing Sinhala song lyrics, artist information, and song metadata with support for both English and Sinhala content.
 
-## 🎵 Project Overview
+## Project Overview
 
 SinSo API is a Spring Boot-based REST API that provides access to a comprehensive database of Sinhala songs, artists, and lyrics. The API supports bilingual content (English and Sinhala) and offers powerful search capabilities across all data fields.
 
 ### Key Features
 
-- 🎼 **Comprehensive Song Database**: Access to extensive collection of Sinhala songs
-- 🎤 **Artist Information**: Detailed artist profiles with associated songs
-- 📝 **Lyrics Access**: Full lyrics content in both Sinhala and English
-- 🔍 **Advanced Search**: Multi-field search across songs, artists, and lyrics
-- 🌐 **Bilingual Support**: Full support for both English and Sinhala content
-- 📚 **Interactive Documentation**: Built-in Swagger/OpenAPI documentation
-- ⚡ **Rate Limiting**: Built-in rate limiting for API protection
-- 🎨 **Web Interface**: User-friendly web interface for database exploration
+- **Comprehensive Song Database**: Access to extensive collection of Sinhala songs
+- **Artist Information**: Detailed artist profiles with associated songs
+- **Lyrics Access**: Full lyrics content in both Sinhala and English
+- **Advanced Search**: Multi-field search across songs, artists, and lyrics
+- **Bilingual Support**: Full support for both English and Sinhala content
+- **Interactive Documentation**: Built-in Swagger/OpenAPI documentation
+- **Rate Limiting**: Built-in rate limiting for API protection
+- **Web Interface**: User-friendly web interface for database exploration
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -53,7 +53,7 @@ SinSo API is a Spring Boot-based REST API that provides access to a comprehensiv
    - Interactive Documentation: `http://localhost:8080/v1/docs/`
    - Web Interface: `http://localhost:8080/`
 
-## 📖 API Documentation
+## API Documentation
 
 ### Base URL
 ```
@@ -62,18 +62,18 @@ http://localhost:8080/v1
 
 ### Available Endpoints
 
-#### 🎵 Songs
+#### Songs
 - `GET /songs` - Get all songs summary
 - `GET /songs/{songId}` - Get specific song details
 
-#### 🎤 Artists
+#### Artists
 - `GET /artists` - Get all artists summary
 - `GET /artists/{artistId}` - Get specific artist with songs
 
-#### 📝 Lyrics
+#### Lyrics
 - `GET /lyrics/{lyricId}` - Get specific song lyrics
 
-#### 🔍 Search
+#### Search
 - `GET /search?all={query}` - Global search across all fields
 - `GET /search?artist={name}` - Search by artist name
 - `GET /search?title={title}` - Search by song title
@@ -87,7 +87,7 @@ http://localhost:8080/v1
 - `page` - Page number for pagination (default: 0)
 - `size` - Results per page (default: 20, max: 100)
 
-## 💡 Usage Examples
+## Usage Examples
 
 ### Get All Songs
 ```bash
@@ -124,7 +124,7 @@ curl "http://localhost:8080/v1/artists/artist_456"
 curl "http://localhost:8080/v1/lyrics/lyric_789"
 ```
 
-## 🛠️ Development
+## Development
 
 ### Project Structure
 ```
@@ -160,7 +160,7 @@ The application can be configured via `application.properties`:
 - Swagger documentation settings
 - Server port configuration
 
-## 🐳 Docker Support
+## Docker Support
 
 The project includes a Dockerfile for containerized deployment:
 
@@ -172,7 +172,7 @@ docker build -t sinso-api .
 docker run -p 8080:8080 sinso-api
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions to the SinSo API project! Here's how you can help:
 
@@ -206,30 +206,30 @@ We welcome contributions to the SinSo API project! Here's how you can help:
 
 ### Areas for Contribution
 
-- 🐛 Bug fixes
-- ✨ New features
-- 📚 Documentation improvements
-- 🧪 Test coverage
-- 🎨 UI/UX enhancements
-- 🌐 Additional language support
-- 📊 Performance optimizations
+- Bug fixes
+- New features
+- Documentation improvements
+- Test coverage
+- UI/UX enhancements
+- Additional language support
+- Performance optimizations
 
-## 📄 License
+## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 👥 Contact
+## Contact
 
 - **Developer**: Vishal Rashmika
 - **Email**: vishal@vishalrashmika.com
 - **Website**: [vishalrashmika.com](https://vishalrashmika.com)
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - Thanks to all contributors who help maintain this project
 - Special thanks to the Sinhala music community for their support
-- Built with ❤️ for the Sinhala music lovers worldwide
+- Built with love for the Sinhala music lovers worldwide
 
 ---
 
-**Made with ❤️ for the Sinhala Music Community**
+**Made with love for the Sinhala Music Community**
