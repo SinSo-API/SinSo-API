@@ -302,3 +302,36 @@ mark {
     padding: 1rem;
     margin: 1rem 0;
 }
+.api-footer {
+    background-color: #f5f5f5;
+    border-top: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 40px;
+    text-align: center;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.footer-section {
+    font-size: 14px;
+}
+
+.footer-section a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.status-badge {
+    color: #28a745;
+    font-weight: bold;
+}

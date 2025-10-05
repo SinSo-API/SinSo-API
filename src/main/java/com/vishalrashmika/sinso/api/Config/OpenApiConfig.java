@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
     info = @Info(
         contact = @Contact(
             name = "${app.contact.name:Vishal Rashmika}",
-            email = "${app.contact.email:contact@vishalrashmika.com}",
+            email = "${app.contact.email:vishal@vishalrashmika.com}",
             url = "${app.contact.url:https://vishalrashmika.com}"
         ),
         description = "${app.doc_description:REST API documentation for SINSO music platform}",
@@ -42,7 +42,7 @@ public class OpenApiConfig {
     @Value("${app.contact.name:Vishal Rashmika}")
     private String contactName;
 
-    @Value("${app.contact.email:contact@vishalrashmika.com}")
+    @Value("${app.contact.email:vishal@vishalrashmika.com}")
     private String contactEmail;
 
     @Value("${app.contact.url:https://vishalrashmika.com}")
