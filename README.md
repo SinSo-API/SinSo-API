@@ -53,6 +53,8 @@ SinSo API is a Spring Boot-based REST API that provides access to a comprehensiv
    - Interactive Documentation: `http://localhost:8080/v1/docs/`
    - Web Interface: `http://localhost:8080/`
 
+> **Note**: A future update will allow users to self-host the API by themselves using Docker for easier deployment and management.
+
 ## API Documentation
 
 ### Base URL
